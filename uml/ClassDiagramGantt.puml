@@ -1,0 +1,59 @@
+@startuml
+
+class Solution{
+    -int iNbProcessed
+    -int iNbRejected
+    -int iEpsilon
+    -long lNbNode
+    -double dFunctionObjective
+    -double dTimeSolved
+    -String sSolutionStatus
+    - List<Machine> listMachine
+}
+
+
+class Machine{
+    -int iIdMachine
+    -List<Job> listJob
+}
+
+class Job{
+    -int iIdJob
+    -int iIdOperation
+    -int iStartTime
+    -int iProcessingTime
+    -int getEndTime()
+}
+
+interface DrawService{
+    int getYAt_k(int k)
+    int getXStartAt_kj(int k, int j)
+    int getXEndAt_kj(int k, int j)
+    int getWidthAt_kj(int k, int j)
+    Color getColorAt_i(int i)
+    void drawAt_kj(int k, int j)
+    void drawData()
+    void drawTitle()
+    void saveAsImage(String filename)
+}
+
+class FileUtil{
+    +{static} Solution ReadSolution(String filename)
+}
+
+class DrawSolution{
+    -BufferedImage image
+    -Graphics2D graphics
+    -Solution solution
+}
+
+class Launch{
+}
+
+Solution *-r- Machine:have
+Machine *-u- Job:have
+DrawService <|-- DrawSolution
+DrawSolution *--> Solution
+Launch -u-> FileUtil:read
+Launch -r-> DrawSolution
+@enduml
