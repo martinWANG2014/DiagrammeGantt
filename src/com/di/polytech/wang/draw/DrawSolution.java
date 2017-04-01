@@ -62,6 +62,7 @@ public class DrawSolution implements DrawService {
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         graphics = image.createGraphics();
         graphics.setBackground(Color.WHITE);
+        graphics.fillRect(0,0, WIDTH, HEIGHT);
         colorList = new ArrayList<>();
         initColor();
     }
@@ -105,8 +106,9 @@ public class DrawSolution implements DrawService {
         int i = solution.getOperationAt_kj(k, j).getId_Job();
         int u = solution.getOperationAt_kj(k, j).getId_Operation();
         graphics.setColor(getColorAt_i(i));
-        graphics.drawRect(getXStartAt_kj(k, j), getYAt_k(k), getWidthAt_kj(k, j), HEIGHT_OPERATION);
+        graphics.fillRect(getXStartAt_kj(k, j), getYAt_k(k), getWidthAt_kj(k, j), HEIGHT_OPERATION);
         Font font = new Font("TimesRoman", Font.BOLD, 9);
+        graphics.setColor(Color.BLACK);
         graphics.setFont(font);
         graphics.drawString("O(" + (i + 1) + ","+ (u + 1) + ")",
                 getXStartAt_kj(k, j), getYAt_k(k) + HEIGHT_OPERATION);
